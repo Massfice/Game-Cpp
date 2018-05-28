@@ -1,5 +1,5 @@
 #include "Headers/mycppdef.h"
-#include "Classes/publicMechanics/publicMechanics.h"
+#include "Headers/Classes/publicMechanics/publicMechanics.h"
 
 class Menu
 {
@@ -62,7 +62,8 @@ class Menu
 
 class MainMenu:public Menu {
 	public:
-	MainMenu(string* str):Menu(str) {
+	MainMenu(string* str):Menu(str)
+	{
 		cout << endl << endl << "                             MENU G£ÓWNE" << endl;
 		cout << "     (wybierz pozycjê za pomoc¹ W|S, a nastêpnie kliknij Enter)" << endl << endl;	
 		cout << options[i];
@@ -82,7 +83,6 @@ class MainMenu:public Menu {
 	
 int main()
 {
-
 	setlocale(LC_ALL, "polish"); //polskie znaki
 	
 	newFullfilArray(string,str,"Nowa Gra", "Kontynuuj Grê","Autor","WyjdŸ");
@@ -90,7 +90,6 @@ int main()
 	char c;
 	while(1)
 	{
-		dm->b2 = true;
 		c = _getch();
 		if(c == 's')
 		{ //w dó³
