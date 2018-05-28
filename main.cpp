@@ -1,35 +1,7 @@
-#include <iostream>
-#include <string.h>
-#include <cstring>
-#include <string>
-#include <sstream>
-#include <windows.h> // Sleep(int milisekundy) - usypia program na x milisekund, 1 sekunda = 1000 milisekund
-#include <conio.h>
-#include <cstddef>
-#include <iterator>
-#include <ctime>
+#include "Headers/mycppdef.h"
+#include "Classes/publicMechanics/publicMechanics.h"
 
 #define tab(a) a,sizeof(a)/sizeof(a[0])
-
-
-using namespace std;
-
-class defaultMech {
-	public:
-	defaultMech(){}
-	bool b = false; //wyœwietlanie ID opcji
-	bool b2 = true; //dostêp do standardowego dzia³ania
-	bool b3 = false; //powrót do poprzedniego menu
-	string password_id = "12345"; //has³o do menu ID Opcji
-	
-	string intToString (int a) { //funkcja skopiowana z internetu
-    ostringstream temp;
-    temp << a;
-    return temp.str();
-	}
-};
-
-defaultMech* dm = new defaultMech();
 
 class Menu {
 	protected:
@@ -70,6 +42,16 @@ class Menu {
 	Menu(string str[], int size) {
 		i = 0;
 		this->size = size;
+		this->str = str;
+		options = new string[size];
+		wrongOption = "\nOpcja nie zosta³a zaprogramowana.";
+		
+		setArrayOption(dm->b);
+	}
+	
+		Menu(string* str) {
+		i = 0;
+		size = arraySize(str);
 		this->str = str;
 		options = new string[size];
 		wrongOption = "\nOpcja nie zosta³a zaprogramowana.";
@@ -142,7 +124,7 @@ class idOptionsMenu:public Menu {
 			case 1: dm->b = true; dm->b3 = true; break;
 			case 2: changePassword(); dm->b3 = true; break;
 			case 3: dm->b3 = true; break;
-			default: cout << wrongOption << endl << endl << options[i];
+			default: newEmptyArray(int,d,4); cout << wrongOption << endl << endl << options[i] << endl << endl << arraySize(d);
 		}	
 	}
 	
@@ -172,11 +154,14 @@ class MainMenu:public Menu {
 		cout << options[i];
 	}
 	
+	MainMenu(string* str):Menu(str) {
+		cout << endl << endl << "                             MENU G£ÓWNE" << endl;
+		cout << "     (wybierz pozycjê za pomoc¹ W|S, a nastêpnie kliknij Enter)" << endl << endl;	
+		cout << options[i];
+	}
+	
 	void executeOption() {
 		switch(i) {
-			case 0: cout << endl << "Tutaj mia³a byæ gra, ale póki co pokazuje tylko obecny czas. Przepraszam. "
-			<< "Nie zd¹¿y³em. Obecny czas = " << time(0) << "."
-			<< endl << endl << options[i]; break; 
 			case 2: idOptions(); break;
 			case 4: exit(0); break;
 			default: cout << wrongOption << endl << endl << options[i];
@@ -216,8 +201,10 @@ class MainMenu:public Menu {
 int main() {
 
 	setlocale(LC_ALL, "polish"); //polskie znaki
-	string str[] = {"Nowa Gra", "Kontynuuj Grê", "Identyfikatory Opcji","Autor","WyjdŸ"};
-	MainMenu* menu = new MainMenu(tab(str));
+	
+	//string str[] = {"Nowa Gra", "Kontynuuj Grê", "Identyfikatory Opcji","Autor","WyjdŸ"};
+	newFullfilArray(string,str,"Nowa Gra", "Kontynuuj Grê", "Identyfikatory Opcji","Autor","WyjdŸ");
+	MainMenu* menu = new MainMenu(str);
 	char c;
 	while(1) {
 		dm->b2 = true;
