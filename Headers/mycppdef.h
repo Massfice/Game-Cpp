@@ -19,8 +19,8 @@ using namespace std;
 
 #define newEmptyArray(Y,X,s); Y* X = new Y; tabs[l] = new tab; tabs[l]->size = s; tabs[l]->name = #X; l++;
 #define newFullfilArray(Y,X,...); Y X[] = {__VA_ARGS__}; tabs[l] = new tab; tabs[l]->size = sizeof(X)/sizeof(X[0]); tabs[l]->name = #X; tabs[l]->an=tabs[l]->size; l++;
-#define arraySize(X) dm->sizeOfArray(#X) //MO¯E POWODOWAÆ B£ÊDY! NIE U¯YWAÆ NA PARAMETRZE FUNKCJI/KONSTRUKTORA/DESTRUKTORA!
-#define awn(X) X,#X
+#define arraySize(X) dm->sizeOfArray(#X) //MO¯E POWODOWAÆ B£ÊDY! NIE U¯YWAÆ NA PARAMETRZE FUNKCJI/KONSTRUKTORA/DESTRUKTORA, JE¯ELI
+#define awn(X) X,#X						//MA INN¥ NAZWÊ NI¯ ZMIENNA!
 #define setArray(Y,X); X = Y; tabs[l]->size = arraySize(Y); tabs[l]->name = #X; l++;
 #define addToArray(Y,X); dm->arrayAdding(#Y,Y,X);
 
