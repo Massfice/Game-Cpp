@@ -3,17 +3,17 @@
 class Menu
 {
 	protected:
-	int i;
 	string * options;
-	string menuTextToRefresh = "";
+	string menuText = "";
 	int size;
+	int i;
 	string wrongOption;
 	bool isActive;
 	virtual void executeOption() = 0;
-	void refreshMenu()
+	void refreshConsole(string TextToRefresh)
 	{
 		system("cls");
-		cout << menuTextToRefresh;
+		cout << TextToRefresh;
 	}
 		
 	public:
@@ -39,10 +39,10 @@ class Menu
 		}
 	}
 	
-	Menu(string* str)
+	Menu(string* str, string name)
 	{
 		i = 0;
-		size = arraySize(str);
+		size = dm->sizeOfArray(name);
 		options = new string[size];
 		wrongOption = "\nOpcja nie zosta³a zaprogramowana.";
 		isActive = true;
