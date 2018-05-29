@@ -11,22 +11,31 @@ class MainMenu:public Menu
 	}
 	
 	private:
-	AuthorMenu* authorMenu;
 	void executeOption()
 	{
 		switch(i)
 		{
-			case 2:
-			{	
-				newFullfilArray(string,str2,"Aby powróciæ do menu g³ównego, naciœnij Enter.");
-				authorMenu = new AuthorMenu(awn(str2));
-				authorMenu->setOption();
-				break;
-			}
-			case 3: exit(0); break;
+			case 2: goToAuthor(); break;
+			case 3: goToExit(); break;
 			default: cout << endl << endl << wrongOption << endl; system("pause");
 		}
-		
+	}
+	
+	//Opcje Menu:
+	void goToAuthor()
+	{
+		newFullfilArray(string,str2,"Aby powróciæ do menu g³ównego, naciœnij Enter.");
+		AuthorMenu* authorMenu = new AuthorMenu(awn(str2));
+		authorMenu->setOption();
+		isActive = true;
+		refreshConsole(menuText);
+	}
+	
+	void goToExit()
+	{
+		newFullfilArray(string,str3,"Nie","Tak");
+		ExitMenu* exitMenu = new ExitMenu(awn(str3));
+		exitMenu->setOption();
 		isActive = true;
 		refreshConsole(menuText);
 	}

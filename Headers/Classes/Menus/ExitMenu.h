@@ -1,11 +1,11 @@
-#ifndef AUTHORMENU
-#define AUTHORMENU
-class AuthorMenu:public Menu
+#ifndef EXITMENU
+#define EXITMENU
+class ExitMenu:public Menu
 {
 	public:
-	AuthorMenu(string* str, string name):Menu(str,name)
+	ExitMenu(string* str, string name):Menu(str,name)
 	{	
-		menuText= "\n\nAutor: Adrian Larysz\n";
+		menuText= "\n\nCzy na pewno chcesz wyjœæ?\n";
 		menuText.append(options[i]);
 		refreshConsole(menuText);
 	}
@@ -16,6 +16,7 @@ class AuthorMenu:public Menu
 		switch(i)
 		{
 			case 0: break;
+			case 1: exit(0); break;
 			default: cout << endl << endl << wrongOption << endl; system("pause");
 		}
 	}
