@@ -17,7 +17,7 @@ class MainMenu:public Menu
 		{
 			case 2: goToAuthor(); break;
 			case 3: goToExit(); break;
-			default: cout << endl << endl << wrongOption << endl; system("pause");
+			default: wrongOptionDisplay();
 		}
 	}
 	

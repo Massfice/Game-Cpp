@@ -9,14 +9,24 @@ class Menu
 	int i;
 	string wrongOption;
 	bool isActive;
+	
 	virtual void executeOption() = 0;
+	
 	void refreshConsole(string TextToRefresh)
 	{
 		system("cls");
 		cout << TextToRefresh;
 	}
-		
-	public:
+	
+	void wrongOptionDisplay()
+	{
+		system("cls");
+		cout << wrongOption << ". ";
+		system("pause");
+		isActive = true;
+		refreshConsole(menuText);
+	}
+	
 	void setArrayOption(string* str)
 	{
 		int buff = 0;
@@ -38,7 +48,8 @@ class Menu
 			
 		}
 	}
-	
+		
+	public:
 	Menu(string* str, string name)
 	{
 		i = 0;
@@ -69,9 +80,11 @@ class Menu
 			{	
 				isActive = false;
 				executeOption();
+				//isActive = true;
 			}
 			cout << options[i];	
 		}	
 	}
+	
 };
 #endif
