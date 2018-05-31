@@ -20,6 +20,12 @@ struct hashedString
 	int* Valid;
 };
 
+struct fileList
+{
+	string* String;
+	int Size;
+};
+
 tab** tabs  = new tab*;
 
 class publicMechanics
@@ -69,10 +75,12 @@ class publicMechanics
 		return ss;
 	}
 	
-	string* listOfFiles(string folder, string fileExtension)
+	fileList* listOfFiles(string folder, string fileExtension)
 	{
+		fileList* fl = new fileList;
     	string* files = new string[9999];
     	string buff = "/*.";
+    	int counter = 0;
     	buff.append(fileExtension);
     
     	string search_path = folder + buff;
@@ -92,8 +100,16 @@ class publicMechanics
         } while(::FindNextFile(hFind, &fd)); 
         ::FindClose(hFind); 
     	}
-    
-    	return files;
+    	
+    	for(i = 0; i < 9999; i++)
+    	{
+    		if(files[i] != "") counter++; else break;
+		}
+    	
+    	fl->String = files;
+    	fl->Size = counter;
+    	
+    	return fl;
 	}
 	
 	hashedString* myHash(string str, int x)
@@ -267,7 +283,40 @@ class publicMechanics
 	
 	void hashSavesAtStart()
 	{
-		
+		fileList* tab = listOfFiles("Saves","gcpp");
+		if(tab->Size > 0)
+		{
+			string buff;
+			ifstream ifs;
+			splitedString* ss1;
+			splitedString* ss2;
+			splitedString* ss3;
+			hashedString* hs = new hashedString;
+			int ibuff;
+			int i;
+			int k;
+			for(i = 0; i < tab->Size; i++)
+			{
+				try
+				{	
+					ifs.open(tab->String[i].c_str(),ios::in);
+					getline(ifs,buff,'\0');
+					ss1 = splitString(buff,'>');
+					ibuff = atoi(ss1->String[0].c_str());
+					ss2 = splitString(ss1->String[1],'|');
+					ss3 = splitString(ss1->String[2],'|');
+					hs->String = new string[ss2->String[1].size()];
+					hs->Valid =  new int[ss3->String[1].size()];
+					for(k = 0; k < ss2->String[1].size(); k++)
+					{
+						hs->String[k] = ss2->String[k];
+						hs->Valid[k] = atoi(ss3->String[k].c_str());
+					}
+					buff = myDeHash(hs,ss2->String[1].size(),ibuff);
+					ifs.close();
+				} catch(exception e) { cout << "Cos poszlo nie tak..."; }	
+			}
+		}
 	}
 	
 };

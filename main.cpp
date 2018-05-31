@@ -9,7 +9,12 @@ int main()
 {
 	setlocale(LC_ALL, "polish"); //polskie znaki
 	
-	newFullfilArray(string,str,"Nowa Gra", "Kontynuuj Grê","Autor","WyjdŸ");
+	dm->hashSavesAtStart();
+	
+	newFullfilArray(string,str,"                             Nowa Gra",
+	"                             Kontynuuj Grê",
+	"                             Autor",
+	"                             WyjdŸ");
 	MainMenu* menu = new MainMenu(awn(str));
 	menu->setOption();
 	

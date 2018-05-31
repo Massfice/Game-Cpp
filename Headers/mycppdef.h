@@ -5,8 +5,12 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <conio.h>
 #include <Windows.h>
+#include <ctime>
+#include <stdlib.h>
+#include <math.h>
 
 //-----------------------------------------------
 
