@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <conio.h>
+#include <Windows.h>
 
 //-----------------------------------------------
 
@@ -22,12 +23,12 @@ using namespace std;
 #define newFullfilArray(Y,X,...); Y X[] = {__VA_ARGS__}; macrobuff(X) tabs[l]->name = #X; tabs[l]->an=tabs[l]->size; l++;
 #define arraySize(X) dm->sizeOfArray(#X) /* MO¯E POWODOWAÆ B£ÊDY! NIE U¯YWAÆ NA PARAMETRZE FUNKCJI/KONSTRUKTORA/DESTRUKTORA, JE¯ELI
 MA INN¥ NAZWÊ NI¯ ZMIENNA! Nale¿y u¿ywaæ nazwy zmiennej takiej jakiej u¿yliœmy w makrodefinicji newEmptyArray lub newFullfilArray
-lub setArray */ 
+lub setArray. NIE U¯YWAÆ DLA FUNCJI, KTÓRA ZWRACA TABLICÊ.*/ 
 #define awn(X) X,#X
 #define setArray(Y,X); X = Y; tabs[l]->size = arraySize(Y); tabs[l]->name = #X; l++; /* MO¯E POWODOWAÆ B£ÊDY! NIE U¯YWAÆ NA PARAMETRZE
 FUNKCJI/KONSTRUKTORA/DESTRUKTORA, JE¯ELI MA INN¥ NAZWÊ NI¯ ZMIENNA!
 Nale¿y u¿ywaæ nazwy zmiennej takiej jakiej u¿yliœmy w makrodefinicji newEmptyArray lub newFullfilArray
-lub setArray */
+lub setArray. NIE U¯YWAÆ DLA FUNCJI, KTÓRA ZWRACA TABLICÊ.*/
 #define addToArray(Y,X); dm->arrayAdding(#Y,Y,X);
 
 int l = 0;
