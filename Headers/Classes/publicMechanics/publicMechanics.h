@@ -192,8 +192,6 @@ class publicMechanics
 			sbuff1[i] = str->String[size - i - 1];
 		}
 	
-		cout << endl;
-	
 		bool b = true;
 		for(i = 0; i < size; i++)
 		{
@@ -287,34 +285,70 @@ class publicMechanics
 		if(tab->Size > 0)
 		{
 			string buff;
+			string buff2 = "";
+			string saves = "Saves/";
 			ifstream ifs;
+			ofstream ofs;
 			splitedString* ss1;
 			splitedString* ss2;
 			splitedString* ss3;
-			hashedString* hs = new hashedString;
+			hashedString* hs;
 			int ibuff;
 			int i;
 			int k;
+			double sum = 0.0;
+			int ave;
 			for(i = 0; i < tab->Size; i++)
 			{
 				try
 				{	
-					ifs.open(tab->String[i].c_str(),ios::in);
+					hs  = new hashedString;
+					ss1 = new splitedString;
+					ss2 = new splitedString;
+					ss3 = new splitedString;
+					saves.append(tab->String[i]);
+					ifs.open(saves.c_str(),ios::in);
 					getline(ifs,buff,'\0');
 					ss1 = splitString(buff,'>');
 					ibuff = atoi(ss1->String[0].c_str());
 					ss2 = splitString(ss1->String[1],'|');
+					for(k = 0; k < ss2->Size; k++)
+					{
+						sum = sum + atof(ss2->String[k].c_str());
+					}
+					ave = sum / ss2->Size * 2;
+					if(ave > 700 || ave < -700) ave = ave % 30;
 					ss3 = splitString(ss1->String[2],'|');
-					hs->String = new string[ss2->String[1].size()];
-					hs->Valid =  new int[ss3->String[1].size()];
-					for(k = 0; k < ss2->String[1].size(); k++)
+					hs->String = new string[ss2->Size];
+					hs->Valid =  new int[ss3->Size];
+					for(k = 0; k < ss2->Size; k++)
 					{
 						hs->String[k] = ss2->String[k];
 						hs->Valid[k] = atoi(ss3->String[k].c_str());
 					}
-					buff = myDeHash(hs,ss2->String[1].size(),ibuff);
+					buff = myDeHash(hs,ss2->Size,ibuff);
 					ifs.close();
-				} catch(exception e) { cout << "Cos poszlo nie tak..."; }	
+					hs = myHash(buff,ave);
+					buff2.append(toString(ave));
+					buff2.append(">");
+					for(k = 0; k < buff.size(); k++)
+					{
+						buff2.append(hs->String[k]);
+						if(k < buff.size() - 1) buff2.append("|");
+					}
+					buff2.append(">");
+					for(k = 0; k < buff.size(); k++)
+					{
+						buff2.append(toString(hs->Valid[k]));
+						if(k < buff.size() - 1) buff2.append("|");
+					}
+					
+					ofs.open(saves.c_str(),ios::out);
+					ofs << buff2;
+					ofs.close();
+					
+					saves = "Saves/";
+				} catch(exception e) { cout << "Coœ posz³o nie tak..."; }	
 			}
 		}
 	}
