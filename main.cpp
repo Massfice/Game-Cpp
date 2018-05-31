@@ -1,6 +1,7 @@
 #include "Headers/mycppdef.h"
 #include "Headers/Classes/PublicMechanics/PublicMechanics.h"
 #include "Headers/Classes/Menus/Menu.h"
+#include "Headers/Classes/Menus/NewGameMenu.h"
 #include "Headers/Classes/Menus/AuthorMenu.h"
 #include "Headers/Classes/Menus/ExitMenu.h"
 #include "Headers/Classes/Menus/MainMenu.h"
