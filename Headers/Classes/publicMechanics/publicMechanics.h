@@ -39,6 +39,43 @@ class publicMechanics
     	return temp.str();
 	}
 	
+	string plString(string str)
+	{
+		const char* tab = str.c_str();
+	
+		string* PL = new string[123];
+		//PL - Polish Letters, a nie Polska :)
+		PL[91] = "π";
+		PL[122] = "Ê";
+		PL[87] = "Í";
+		PL[120] = "≥";
+		PL[28] = "Ò";
+		PL[94] = "Û";
+		PL[104] = "ú";
+		PL[85] = "ü";
+		PL[66] = "ø";
+		PL[92] = "•";
+		PL[113] = "∆";
+		PL[88] = " ";
+		PL[99] = "£";
+		PL[29] = "—";
+		PL[32] = "”";
+		PL[105] = "å";
+		PL[115] = "è";
+		PL[67] = "Ø";
+	
+		int i;
+		int ibuff;
+		string sbuff = "";
+		for(i = 0; i < str.size(); i++)
+		{
+			ibuff = (int)tab[i];
+			if(ibuff < 0) sbuff.append(PL[ibuff * -1]); else sbuff.append(toString(tab[i]));
+		}
+		
+		return sbuff;
+	}
+
 	splitedString* splitString(string str, char c)
 	{
 		string* r;
@@ -243,6 +280,7 @@ class publicMechanics
 		
 			suma = 0;
 		}
+		
 		return r;
 	}
 	

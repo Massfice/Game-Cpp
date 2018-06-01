@@ -40,7 +40,7 @@ class NewGameMenu:public Menu
 		{
 			system("cls");
 			cout << "Podaj nazwê nowego profilu: ";
-			cin >> pname;
+			cinp(pname);
 			pname.append(".gcpp");
 			for(i = 0; i < fl->Size; i++)
 			{
@@ -72,19 +72,19 @@ class NewGameMenu:public Menu
    				string* cases = new string[7];
 				
 				cout << "Mianownik (Kto? Co?): ";
-				cin >> cases[0];
+				cinp(cases[0]);
 				cout <<"Dope³niacz (Kogo? Czego?): ";
-				cin >> cases[1];
+				cinp(cases[1]);
 				cout << "Celownik (Komu? Czemu?): ";
-				cin >> cases[2];
+				cinp(cases[2]);
 				cout << "Biernik (Kogo? Co?): ";
-				cin >> cases[3];
+				cinp(cases[3]);
 				cout << "Narzêdnik (Z kim? Z czym?): ";
-				cin >> cases[4];
+				cinp(cases[4]);
 				cout << "Miejscownik (O kim? O czym?): ";
-				cin >> cases[5];
+				cinp(cases[5]);
 				cout << "Wo³acz (O mój! O moja!): ";
-				cin >> cases[6];
+				cinp(cases[6]);
 				
 				string buff1 = "";
 				string buff2 = "";
@@ -113,8 +113,6 @@ class NewGameMenu:public Menu
 				
 				b = false;
 				system("pause");
-				
-				ios_base::sync_with_stdio(true);
 			}
 			
 			rsmenu->setShouldReplace(false);

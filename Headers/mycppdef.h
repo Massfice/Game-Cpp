@@ -50,4 +50,23 @@ int l = 0;
  NALE¯Y ZATEM U¯YWAÆ UNIKATOWYCH NAZW ZMIENNYCH! */
 //-----------------------------------------------
 
+//Wprowadzanie polskich znaków przez cin/getline
+#define cinp(x); cin >> x; x = dm->plString(x);
+#define cins(x); string x; cin >> x; x = dm->plString(x);
+#define glinep(y,x); getline(y,x); x = dm->plString(x);
+#define glines(y,x); string x; getline(y,x); x = dm->plString(x);
+#define glinep(y,x,z); getline(y,x,z); x = dm->plString(x);
+#define glines(y,x,z); string x; getline(y,x,z); x = dm->plString(x);
+
+//x - nazwa zmiennej, do której wprowadzamy zawartoœæ
+//y - strumieñ danych wejœciowych
+//z - ogranicznik (wczytuj, dopóki nie nast¹pi), jeœli nie jest podany, getline wczyta tylko jedn¹ liniê
+//cinp(x) - wprowadza ci¹g znaków do istniej¹cego stringa
+//cins(x) - tworzy nowy string i wprowadza do niego ci¹g znaków
+//glinep(y,x) - to samo co cinp(x), ale mo¿e wczytaæ ca³¹ liniê
+//glines(y,x) - to samo co cins(x), ale mo¿e wczytaæ ca³¹ liniê
+//glinep(y,x,z) - glinep(y,x) z ogranicznikiem
+//glines(y,x,z) - glines(y,x) z ogranicznikiem
+//-----------------------------------------------
+
 #endif
