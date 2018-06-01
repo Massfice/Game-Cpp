@@ -88,26 +88,66 @@ class NewGameMenu:public Menu
 				
 				string buff1 = "";
 				string buff2 = "";
+				string buff3 = "";
 				
-				buff1.append(ssmenu->getSex());
+				buff1.append(ssmenu->getSex()); //P³eæ - split[0]
 				buff1.append("|");
-				buff1.append(cases[0]);
+				buff1.append(cases[0]); //Mianownik - split[1]
 				buff1.append("|");
-				buff1.append(cases[1]);
+				buff1.append(cases[1]); //Dope³niacz - split[2]
 				buff1.append("|");
-				buff1.append(cases[2]);
+				buff1.append(cases[2]); //Celownik - split[3]
 				buff1.append("|");
-				buff1.append(cases[3]);
+				buff1.append(cases[3]); //Biernik - split[4]
 				buff1.append("|");
-				buff1.append(cases[4]);
+				buff1.append(cases[4]); //Narzêdnik - split[5]
 				buff1.append("|");
-				buff1.append(cases[5]);
+				buff1.append(cases[5]); //Miejscownik - split[6]
 				buff1.append("|");
-				buff1.append(cases[6]);
+				buff1.append(cases[6]); //Wo³acz - split[7]
+				buff1.append("|");
+				buff1.append("1"); //Poziom fabularny - split[8]
+				buff1.append("|");
+				buff1.append("1"); //Poziom postaci - split[9]
+				buff1.append("|");
+				buff1.append("1"); //Wytrzyma³oœæ postaci - split[10]
+				buff1.append("|");
+				buff1.append("1"); //Si³a postaci - split[11]
+				buff1.append("|");
+				buff1.append("1"); //Szybkoœæ postaci - split[12]
+				buff1.append("|");
+				buff1.append("1"); //Inteligencja postaci - split[13]
+				buff1.append("|");
+				buff1.append("1"); //Charyzma/Perswazja (Umiejêtnoœci Spo³eczne) postaci - split[14]
+				buff1.append("|");
+				buff1.append("+"); //Ekwipunek postaci przedmioty w Ekwipunku oddzielane za pomoc¹ plusa ("+") - split[15]
 				
 				hashedString* hs = dm->myHash(buff1,0);
 				
-				cout << dm->myDeHash(hs,buff1.size(),0) << endl;
+				int i;
+				for(i = 0; i < buff1.size(); i++)
+				{
+					buff2.append(hs->String[i]);
+					buff3.append(dm->toString(hs->Valid[i]));
+					if(i < buff1.size() - 1)
+					{
+						buff2.append("|");
+						buff3.append("|");
+					}
+				}
+				
+				buff1 = "0>";
+				buff1.append(buff2);
+				buff1.append(">");
+				buff1.append(buff3);
+				
+				buff2 = "Saves/";
+				buff2.append(pname);
+				
+				ofstream ofs;
+				ofs.open(buff2.c_str(),ios::out);
+				ofs << buff1;
+				ofs.close();
 				
 				cout << "Gratulacje. Utworzy³eœ/³aœ profil." << endl;
 				
