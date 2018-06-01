@@ -366,6 +366,7 @@ class publicMechanics
 					}
 					buff = myDeHash(hs,ss2->Size,ibuff);
 					ifs.close();
+					cout << buff << endl;
 					hs = myHash(buff,ave);
 					buff2.append(toString(ave));
 					buff2.append(">");
@@ -386,6 +387,8 @@ class publicMechanics
 					ofs.close();
 					
 					saves = "Saves/";
+					buff ="";
+					buff2 = "";
 				} catch(exception e) { cout << "Coœ posz³o nie tak..."; }	
 			}
 		}
