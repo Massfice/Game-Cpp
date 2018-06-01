@@ -120,7 +120,11 @@ class NewGameMenu:public Menu
 				buff1.append("|");
 				buff1.append("1"); //Charyzma/Perswazja (Umiejêtnoœci Spo³eczne) postaci - split[14]
 				buff1.append("|");
-				buff1.append("+"); //Ekwipunek postaci przedmioty w Ekwipunku oddzielane za pomoc¹ plusa ("+") - split[15]
+				buff1.append("+"); //Przedmioty w "przy sobie", oddzielane za pomoc¹ plusa ("+") - split[15]
+				buff1.append("|");
+				buff1.append("+"); //Przedmioty w sakiewce, oddzielane za pomoc¹ plusa ("+") - split[16]
+				buff1.append("|");
+				buff1.append("+"); //Przedmioty w domu/skarbcu, oddzielane za pomoc¹ plusa ("+") - split[17]
 				
 				hashedString* hs = dm->myHash(buff1,0);
 				
