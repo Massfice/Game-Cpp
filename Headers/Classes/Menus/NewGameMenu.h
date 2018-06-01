@@ -1,7 +1,7 @@
 #ifndef NEWGAMEMENU
 #define NEWGAMEMENU
 class NewGameMenu:public Menu
-{
+{	
 	public:
 	NewGameMenu(string* str, string name):Menu(str,name)
 	{	
@@ -28,10 +28,13 @@ class NewGameMenu:public Menu
 	void createNewProfile()
 	{
 		bool b = true;
+		bool b2 = false;
 		fileList* fl = dm->listOfFiles("Saves/","gcpp");
 		string pname;
 		int i;
 		int counter = 0;
+		newFullfilArray(string,str5,"Wybierz inn¹ nazwê","Zast¹p istniej¹cy profil");
+		ReplaceSaveMenu* rsmenu = new ReplaceSaveMenu(awn(str5));
 		
 		while(b)
 		{
@@ -46,21 +49,50 @@ class NewGameMenu:public Menu
 			
 			if(counter == 0)
 			{
-				cout << "Gratulacje. Utworzy³eœ profil." << endl;
-				b = false;
-				system("pause");
+				rsmenu->setShouldReplace(true);
 			}
 			else
 			{
-				cout << "Niestety. Wybrany profil ju¿ istnieje. Kontynuuj i popraw b³êdy... ";
+				rsmenu->active();
+				rsmenu->setOption();
+				cout << endl;
 				counter = 0;
 				system("pause");
 				
 			}
 			
+			if(rsmenu->getShouldReplace())
+			{
+				newFullfilArray(string,str6,"Mê¿czyzna","Kobieta");
+				SetSexMenu* ssmenu = new SetSexMenu(awn(str6));
+				ssmenu->setOption();
+				menuText = "Odmieñ swoje imiê przez przypadki:\n";
+				refreshConsole(menuText);
+				string* cases = new string[7];
+				cout << "Mianownik (Kto? Co?): ";
+				cin >> cases[0];
+				cout << "Dope³niacz (Kogo? Czego?): ";
+				cin >> cases[1];
+				cout << "Celownik (Komu? Czemu?): ";
+				cin >> cases[2];
+				cout << "Biernik (Kogo? Co?): ";
+				cin >> cases[3];
+				cout << "Narzêdnik (Z kim? Z czym?): ";
+				cin >> cases[4];
+				cout << "Miejscownik (O kim? O czym?): ";
+				cin >> cases[5];
+				cout << "Wo³acz (O mój! O moja!): ";
+				cin >> cases[6];
+				string buff = "";
+				cout << "Gratulacje. Utworzy³eœ/³aœ profil." << endl;
+				b = false;
+				system("pause");
+			}
+			
+			rsmenu->setShouldReplace(false);
+			
 		}
 		
-		isActive = true;
 		refreshConsole(menuText);
 	}
 };
