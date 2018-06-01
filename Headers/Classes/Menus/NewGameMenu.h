@@ -62,16 +62,18 @@ class NewGameMenu:public Menu
 			}
 			
 			if(rsmenu->getShouldReplace())
-			{
+			{	
 				newFullfilArray(string,str6,"Mê¿czyzna","Kobieta");
 				SetSexMenu* ssmenu = new SetSexMenu(awn(str6));
 				ssmenu->setOption();
 				menuText = "Odmieñ swoje imiê przez przypadki:\n";
 				refreshConsole(menuText);
-				string* cases = new string[7];
+   				
+   				string* cases = new string[7];
+				
 				cout << "Mianownik (Kto? Co?): ";
 				cin >> cases[0];
-				cout << "Dope³niacz (Kogo? Czego?): ";
+				cout <<"Dope³niacz (Kogo? Czego?): ";
 				cin >> cases[1];
 				cout << "Celownik (Komu? Czemu?): ";
 				cin >> cases[2];
@@ -83,10 +85,36 @@ class NewGameMenu:public Menu
 				cin >> cases[5];
 				cout << "Wo³acz (O mój! O moja!): ";
 				cin >> cases[6];
-				string buff = "";
+				
+				string buff1 = "";
+				string buff2 = "";
+				
+				buff1.append(ssmenu->getSex());
+				buff1.append("|");
+				buff1.append(cases[0]);
+				buff1.append("|");
+				buff1.append(cases[1]);
+				buff1.append("|");
+				buff1.append(cases[2]);
+				buff1.append("|");
+				buff1.append(cases[3]);
+				buff1.append("|");
+				buff1.append(cases[4]);
+				buff1.append("|");
+				buff1.append(cases[5]);
+				buff1.append("|");
+				buff1.append(cases[6]);
+				
+				hashedString* hs = dm->myHash(buff1,0);
+				
+				cout << dm->myDeHash(hs,buff1.size(),0) << endl;
+				
 				cout << "Gratulacje. Utworzy³eœ/³aœ profil." << endl;
+				
 				b = false;
 				system("pause");
+				
+				ios_base::sync_with_stdio(true);
 			}
 			
 			rsmenu->setShouldReplace(false);

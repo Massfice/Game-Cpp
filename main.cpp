@@ -10,6 +10,8 @@
 	
 int main()
 {
+	//locale loc("");
+	//locale::global (loc);
 	setlocale(LC_ALL, "polish"); //polskie znaki
 	
 	dm->hashSavesAtStart();
