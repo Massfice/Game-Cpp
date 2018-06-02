@@ -23,6 +23,7 @@ struct hashedString
 struct fileList
 {
 	string* String;
+	string* Dates;
 	int Size;
 };
 
@@ -116,6 +117,7 @@ class publicMechanics
 	{
 		fileList* fl = new fileList;
     	string* files = new string[9999];
+    	string* dates = new string[9999];
     	string buff = "/*.";
     	int counter = 0;
     	buff.append(fileExtension);
@@ -123,16 +125,35 @@ class publicMechanics
     	string search_path = folder + buff;
     	WIN32_FIND_DATA fd;
     	HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd); 
-    
+    	
+    	FILETIME ft;
     	int i = 0;
+    	string sbuff = "";
     	if(hFind != INVALID_HANDLE_VALUE)
-		{ 
+		{	
+			
         	do
 			{
             	if(! (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) )
 				{	
+					SYSTEMTIME st;
                 	files[i] = fd.cFileName;
+                	ft = fd.ftLastWriteTime;
+                	FileTimeToSystemTime(&ft,&st);
+                	sbuff.append(toString(st.wYear));
+                	sbuff.append("|");
+                	sbuff.append(toString(st.wMonth));
+                	sbuff.append("|");
+                	sbuff.append(toString(st.wDay));
+                	sbuff.append("|");
+                	sbuff.append(toString(st.wHour));
+                	sbuff.append("|");
+                	sbuff.append(toString(st.wMinute));
+                	sbuff.append("|");
+                	sbuff.append(toString(st.wDayOfWeek));
+                	dates[i] = sbuff;
                 	i++;
+                	sbuff = "";
             	}
         } while(::FindNextFile(hFind, &fd)); 
         ::FindClose(hFind); 
@@ -144,12 +165,13 @@ class publicMechanics
 		}
     	
     	fl->String = files;
+    	fl->Dates = dates;
     	fl->Size = counter;
     	
     	return fl;
 	}
 	
-	hashedString* myHash(string str, int x)
+	hashedString* myHash(string str, int x, int y)
 	{
 		hashedString* h = new hashedString;
 		h->Valid = new int[str.size()];
@@ -174,7 +196,13 @@ class publicMechanics
 		{
 			c = str[i];
 			c = c + i;
-			c = c - x;
+			int ycounter = 2;
+			do
+			{
+				c = c - x;
+				c = c + y / ycounter;
+				ycounter = ycounter * 2 - 1;
+			} while(y / ycounter != 0);
 			h->Valid[i] = (long)c;
 			for(k = 0; k < 4; k++)
 			{	
@@ -204,7 +232,7 @@ class publicMechanics
 		return h;
 	}
 
-	string myDeHash(hashedString* str, int size, int x)
+	string myDeHash(hashedString* str, int size, int x, int y)
 	{
 		string r = "";
 		string* sbuff1 = new string[size];
@@ -270,7 +298,13 @@ class publicMechanics
 			if(ibuff1[size - 1 - i] + suma == str->Valid[i])
 			{
 				ibuff1[size - 1 - i] = ibuff1[size - 1 - i] - i;
-				ibuff1[size - 1 - i] = ibuff1[size - 1 - i] + x;
+				int ycounter = 2;
+				do
+				{
+					ibuff1[size - 1 - i] = ibuff1[size - 1 - i] + x;
+					ibuff1[size - 1 - i] = ibuff1[size - 1 - i] - y / ycounter;
+					ycounter = ycounter * 2 - 1;
+				} while(y / ycounter != 0);
 				r.append(toString((char)ibuff1[size - 1 - i]));	
 			}
 			else
@@ -364,10 +398,9 @@ class publicMechanics
 						hs->String[k] = ss2->String[k];
 						hs->Valid[k] = atoi(ss3->String[k].c_str());
 					}
-					buff = myDeHash(hs,ss2->Size,ibuff);
+					buff = myDeHash(hs,ss2->Size,ibuff,2000000);
 					ifs.close();
-					cout << buff << endl;
-					hs = myHash(buff,ave);
+					hs = myHash(buff,ave,2000000);
 					buff2.append(toString(ave));
 					buff2.append(">");
 					for(k = 0; k < buff.size(); k++)

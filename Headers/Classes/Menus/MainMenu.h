@@ -7,7 +7,7 @@ class MainMenu:public Menu
 	{	
 		menuText= "\n\n                             MENU G£ÓWNE\n     (Wybierz pozycjê za pomoc¹ W|S, a nastêpnie kliknij Enter)\n\n";
 		menuText.append(options[i]);
-		//refreshConsole(menuText);
+		refreshConsole(menuText);
 	}
 	
 	private:

@@ -4,12 +4,14 @@ class SetSexMenu:public Menu
 {
 	private:
 	string sex;
+	bool cbool;
 	
 	public:
 	SetSexMenu(string* str, string name):Menu(str,name)
 	{
-		menuText = "Wybierz p³eæ postaci:\n";
+		menuText = "Wybierz p³eæ postaci (lub wróæ do Menu G³ównego):\n";
 		menuText.append(options[i]);
+		cbool = false;
 		refreshConsole(menuText);
 	}
 	
@@ -18,8 +20,14 @@ class SetSexMenu:public Menu
 		switch(i)
 		{
 			case 0: sex = "M"; break;
-			case 1: sex = "K";
+			case 1: sex = "K"; break;
+			case 2: cbool = true;
 		}
+	}
+	
+	bool getCBool()
+	{
+		return cbool;
 	}
 	
 	string getSex()

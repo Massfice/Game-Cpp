@@ -33,10 +33,10 @@ class NewGameMenu:public Menu
 		string pname;
 		int i;
 		int counter = 0;
-		newFullfilArray(string,str5,"Wybierz inn¹ nazwê","Zast¹p istniej¹cy profil");
+		newFullfilArray(string,str5,"Wybierz inn¹ nazwê","Zast¹p istniej¹cy profil","Powrót");
 		ReplaceSaveMenu* rsmenu = new ReplaceSaveMenu(awn(str5));
 		
-		while(b)
+		while(rsmenu->getCBool())
 		{
 			system("cls");
 			cout << "Podaj nazwê nowego profilu: ";
@@ -55,7 +55,6 @@ class NewGameMenu:public Menu
 			{
 				rsmenu->active();
 				rsmenu->setOption();
-				cout << endl;
 				counter = 0;
 				system("pause");
 				
@@ -63,12 +62,12 @@ class NewGameMenu:public Menu
 			
 			if(rsmenu->getShouldReplace())
 			{	
-				newFullfilArray(string,str6,"Mê¿czyzna","Kobieta");
+				newFullfilArray(string,str6,"Mê¿czyzna","Kobieta","Powrót");
 				SetSexMenu* ssmenu = new SetSexMenu(awn(str6));
 				ssmenu->setOption();
+				if(ssmenu->getCBool()) break;
 				menuText = "Odmieñ swoje imiê przez przypadki:\n";
 				refreshConsole(menuText);
-   				
    				string* cases = new string[7];
 				
 				cout << "Mianownik (Kto? Co?): ";
@@ -120,13 +119,13 @@ class NewGameMenu:public Menu
 				buff1.append("|");
 				buff1.append("1"); //Charyzma/Perswazja (Umiejêtnoœci Spo³eczne) postaci - split[14]
 				buff1.append("|");
-				buff1.append("+"); //Przedmioty w "przy sobie", oddzielane za pomoc¹ plusa ("+") - split[15]
+				buff1.append(""); //Przedmioty w "przy sobie", oddzielane za pomoc¹ plusa ("+") - split[15]
 				buff1.append("|");
-				buff1.append("+"); //Przedmioty w sakiewce, oddzielane za pomoc¹ plusa ("+") - split[16]
+				buff1.append(""); //Przedmioty w sakiewce, oddzielane za pomoc¹ plusa ("+") - split[16]
 				buff1.append("|");
-				buff1.append("+"); //Przedmioty w domu/skarbcu, oddzielane za pomoc¹ plusa ("+") - split[17]
+				buff1.append(""); //Przedmioty w domu/skarbcu, oddzielane za pomoc¹ plusa ("+") - split[17]
 				
-				hashedString* hs = dm->myHash(buff1,0);
+				hashedString* hs = dm->myHash(buff1,0,2000000);
 				
 				int i;
 				for(i = 0; i < buff1.size(); i++)
@@ -155,7 +154,7 @@ class NewGameMenu:public Menu
 				
 				cout << "Gratulacje. Utworzy³eœ/³aœ profil." << endl;
 				
-				b = false;
+				rsmenu->setCBool(false);
 				system("pause");
 			}
 			

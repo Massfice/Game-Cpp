@@ -4,11 +4,13 @@ class ReplaceSaveMenu:public Menu
 {
 	private:
 	bool shouldReplace;
+	bool cbool;
 	
 	public:
 	ReplaceSaveMenu(string* str, string name):Menu(str,name)
 	{
 		shouldReplace = false;
+		cbool = true;
 		menuText = "Niestety. Wybrany profil ju¿ istnieje. Co chcesz zrobiæ?\n";
 		menuText.append(options[i]);
 	}
@@ -24,7 +26,8 @@ class ReplaceSaveMenu:public Menu
 		switch(i)
 		{
 			case 0: break;
-			case 1: shouldReplace = true;
+			case 1: shouldReplace = true; break;
+			case 2: cbool = false;
 		}
 	}
 	
@@ -36,6 +39,16 @@ class ReplaceSaveMenu:public Menu
 	void setShouldReplace(bool shouldReplace)
 	{
 		this->shouldReplace = shouldReplace;
+	}
+	
+	bool getCBool()
+	{
+		return cbool;
+	}
+	
+	void setCBool(bool cbool)
+	{
+		this->cbool = cbool;
 	}
 	
 	void active()
