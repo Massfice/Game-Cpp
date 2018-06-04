@@ -15,8 +15,9 @@ class MainMenu:public Menu
 	{
 		switch(i)
 		{	case 0: goToNewGame(); break;
-			case 2: goToAuthor(); break;
-			case 3: goToExit(); break;
+			case 2: goToDeleteSaves(); break;
+			case 3: goToAuthor(); break;
+			case 4: goToExit(); break;
 			default: wrongOptionDisplay();
 		}
 	}
@@ -30,6 +31,37 @@ class MainMenu:public Menu
 		ngmenu->setOption();
 		isActive = true;
 		refreshConsole(menuText);
+	}
+	
+	void goToDeleteSaves()
+	{
+		fileList* fl = dm->listOfFiles("Saves/","gcpp");
+		if(fl->Size != 0)
+		{
+			splitedString* ss;
+			int i;
+			newEmptyArray(string,strs1,fl->Size);
+			for(i = 0; i < arraySize(strs1); i++)
+			{
+				ss = dm->splitString(fl->String[i],'.');
+				strs1[i] = ss->String[0];
+			}
+		
+			DeleteSavesMenu* dsmmenu = new DeleteSavesMenu(awn(strs1));
+			dsmmenu->setOption();
+			refreshConsole(menuText);
+			
+	
+		}
+		else
+		{
+			system("cls");
+			cout << "Brak zapisów." << endl;
+			system("pause");
+		}
+		
+		refreshConsole(menuText);
+		isActive = true;		
 	}
 	
 	void goToAuthor()

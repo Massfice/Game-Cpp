@@ -9,6 +9,7 @@ class Menu
 	int i;
 	string wrongOption;
 	bool isActive;
+	bool cbool;
 	
 	virtual void executeOption() = 0;
 	
@@ -57,6 +58,7 @@ class Menu
 		options = new string[size];
 		wrongOption = "\nOpcja nie zosta³a zaprogramowana.";
 		isActive = true;
+		cbool = true;
 		setArrayOption(str);
 	}
 	
@@ -80,10 +82,24 @@ class Menu
 			{	
 				isActive = false;
 				executeOption();
-				//isActive = true;
 			}
 			cout << options[i];	
 		}	
+	}
+	
+	bool getCBool()
+	{
+		return cbool;
+	}
+	
+	void setCBool(bool cbool)
+	{
+		this->cbool = cbool;
+	}
+	
+	void active()
+	{
+		isActive = true;
 	}
 	
 };

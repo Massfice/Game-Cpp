@@ -22,7 +22,7 @@ using namespace std;
 
 //Rozmiar tablicy:
 
-#define newEmptyArray(Y,X,s); Y* X = new Y; tabs[l] = new tab; tabs[l]->size = s; tabs[l]->name = #X; l++;
+#define newEmptyArray(Y,X,s); Y* X = new Y[s]; tabs[l] = new tab; tabs[l]->size = s; tabs[l]->name = #X; l++;
 #define macrobuff(X)  tabs[l] = new tab; tabs[l]->size = sizeof(X)/sizeof(X[0]);
 #define newFullfilArray(Y,X,...); Y X[] = {__VA_ARGS__}; macrobuff(X) tabs[l]->name = #X; tabs[l]->an=tabs[l]->size; l++;
 #define arraySize(X) dm->sizeOfArray(#X) /* MO¯E POWODOWAÆ B£ÊDY! NIE U¯YWAÆ NA PARAMETRZE FUNKCJI/KONSTRUKTORA/DESTRUKTORA, JE¯ELI
@@ -36,6 +36,7 @@ lub setArray. NIE U¯YWAÆ DLA FUNCJI, KTÓRA ZWRACA TABLICÊ.*/
 #define addToArray(Y,X); dm->arrayAdding(#Y,Y,X);
 
 int l = 0;
+int deletingSavesCounter = 0;
 
 //Y - rodzaj tablicy (int, double, string, itp.)
 //X - nazwa zmiennej
@@ -69,4 +70,7 @@ int l = 0;
 //glines(y,x,z) - glines(y,x) z ogranicznikiem
 //-----------------------------------------------
 
+//SYSTEMTIME
+SYSTEMTIME* sysTIME;
+//-----------------------------------------------
 #endif

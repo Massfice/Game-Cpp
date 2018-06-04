@@ -23,7 +23,7 @@ struct hashedString
 struct fileList
 {
 	string* String;
-	string* Dates;
+	SYSTEMTIME* Dates;
 	int Size;
 };
 
@@ -38,6 +38,16 @@ class publicMechanics
     	ostringstream temp;
     	temp << a;
     	return temp.str();
+	}
+	
+	int multiplySTE(SYSTEMTIME st)
+	{
+		return st.wYear * st.wMonth * st.wDay * st.wHour * st.wMinute * st.wDayOfWeek;
+	}
+	
+	int multiplySTE(SYSTEMTIME* st)
+	{
+		return st->wYear * st->wMonth * st->wDay * st->wHour * st->wMinute * st->wDayOfWeek;
 	}
 	
 	string plString(string str)
@@ -117,7 +127,7 @@ class publicMechanics
 	{
 		fileList* fl = new fileList;
     	string* files = new string[9999];
-    	string* dates = new string[9999];
+    	SYSTEMTIME* dates = new SYSTEMTIME[9999];
     	string buff = "/*.";
     	int counter = 0;
     	buff.append(fileExtension);
@@ -128,7 +138,6 @@ class publicMechanics
     	
     	FILETIME ft;
     	int i = 0;
-    	string sbuff = "";
     	if(hFind != INVALID_HANDLE_VALUE)
 		{	
 			
@@ -140,20 +149,8 @@ class publicMechanics
                 	files[i] = fd.cFileName;
                 	ft = fd.ftLastWriteTime;
                 	FileTimeToSystemTime(&ft,&st);
-                	sbuff.append(toString(st.wYear));
-                	sbuff.append("|");
-                	sbuff.append(toString(st.wMonth));
-                	sbuff.append("|");
-                	sbuff.append(toString(st.wDay));
-                	sbuff.append("|");
-                	sbuff.append(toString(st.wHour));
-                	sbuff.append("|");
-                	sbuff.append(toString(st.wMinute));
-                	sbuff.append("|");
-                	sbuff.append(toString(st.wDayOfWeek));
-                	dates[i] = sbuff;
+                	dates[i] = st;
                 	i++;
-                	sbuff = "";
             	}
         } while(::FindNextFile(hFind, &fd)); 
         ::FindClose(hFind); 
@@ -398,9 +395,9 @@ class publicMechanics
 						hs->String[k] = ss2->String[k];
 						hs->Valid[k] = atoi(ss3->String[k].c_str());
 					}
-					buff = myDeHash(hs,ss2->Size,ibuff,2000000);
+					buff = myDeHash(hs,ss2->Size,ibuff,multiplySTE(tab->Dates[i]));
 					ifs.close();
-					hs = myHash(buff,ave,2000000);
+					hs = myHash(buff,ave,multiplySTE(sysTIME));
 					buff2.append(toString(ave));
 					buff2.append(">");
 					for(k = 0; k < buff.size(); k++)

@@ -33,7 +33,7 @@ class NewGameMenu:public Menu
 		string pname;
 		int i;
 		int counter = 0;
-		newFullfilArray(string,str5,"Wybierz inn¹ nazwê","Zast¹p istniej¹cy profil","Powrót");
+		newFullfilArray(string,str5,"Wybierz inn¹ nazwê ","Zast¹p istniej¹cy profil ","Powrót ");
 		ReplaceSaveMenu* rsmenu = new ReplaceSaveMenu(awn(str5));
 		
 		while(rsmenu->getCBool())
@@ -125,7 +125,10 @@ class NewGameMenu:public Menu
 				buff1.append("|");
 				buff1.append(""); //Przedmioty w domu/skarbcu, oddzielane za pomoc¹ plusa ("+") - split[17]
 				
-				hashedString* hs = dm->myHash(buff1,0,2000000);
+				sysTIME = new SYSTEMTIME;
+				GetSystemTime(sysTIME);
+				
+				hashedString* hs = dm->myHash(buff1,0,dm->multiplySTE(sysTIME));
 				
 				int i;
 				for(i = 0; i < buff1.size(); i++)
