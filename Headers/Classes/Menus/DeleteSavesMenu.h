@@ -16,21 +16,24 @@ class DeleteSavesMenu:public Menu
 	
 	void executeOption()
 	{
-		ConfirmMenu* cdsmenu = new ConfirmMenu("Czy rzeczywiœcie chcesz usun¹æ ten zapis?",true);
-		cdsmenu->setOption();
-		
-		string buff = "Saves/";
-		
-		if(cdsmenu->getCBool())
+		if(i != size - 1)
 		{
-			buff.append(f[i]);
-			buff.append(".gcpp");
-			if(remove(buff.c_str()) != 0) perror("Deleting Error: ");
-			else
+			ConfirmMenu* cdsmenu = new ConfirmMenu("Czy rzeczywiœcie chcesz usun¹æ ten zapis?",true);
+			cdsmenu->setOption();
+		
+			string buff = "Saves/";
+		
+			if(cdsmenu->getCBool())
 			{
-				cout << endl << "Zapis usuniêty." << endl;	
-			}
-			system("pause");
+				buff.append(f[i]);
+				buff.append(".gcpp");
+				if(remove(buff.c_str()) != 0) perror("Deleting Error: ");
+				else
+				{
+					cout << endl << "Zapis usuniêty." << endl;	
+				}
+				system("pause");
+			}	
 		}
 		
 	}

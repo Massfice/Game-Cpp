@@ -40,12 +40,14 @@ class MainMenu:public Menu
 		{
 			splitedString* ss;
 			int i;
-			newEmptyArray(string,strs1,fl->Size);
-			for(i = 0; i < arraySize(strs1); i++)
+			newEmptyArray(string,strs1,fl->Size+1);
+			for(i = 0; i < arraySize(strs1) - 1; i++)
 			{
 				ss = dm->splitString(fl->String[i],'.');
 				strs1[i] = ss->String[0];
 			}
+			
+			strs1[fl->Size] = "Powrót";
 		
 			DeleteSavesMenu* dsmmenu = new DeleteSavesMenu(awn(strs1));
 			dsmmenu->setOption();
