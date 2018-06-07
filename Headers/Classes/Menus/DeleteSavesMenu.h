@@ -16,8 +16,7 @@ class DeleteSavesMenu:public Menu
 	
 	void executeOption()
 	{
-		newFullfilArray(string,strs2,"Nie","Tak");
-		ConfirmDeleteSaveMenu* cdsmenu = new ConfirmDeleteSaveMenu(awn(strs2));
+		ConfirmMenu* cdsmenu = new ConfirmMenu("Czy rzeczywiœcie chcesz usun¹æ ten zapis?",true);
 		cdsmenu->setOption();
 		
 		string buff = "Saves/";

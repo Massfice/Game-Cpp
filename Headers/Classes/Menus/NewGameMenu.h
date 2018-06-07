@@ -39,8 +39,9 @@ class NewGameMenu:public Menu
 		while(rsmenu->getCBool())
 		{
 			system("cls");
-			cout << "Podaj nazwê nowego profilu: ";
+			cout << "Podaj nazwê nowego profilu. Lub wpisz 'menu', by powróciæ do menu g³ównego. Wpisz: ";
 			cinp(pname);
+			if(pname == "menu") break;
 			pname.append(".gcpp");
 			for(i = 0; i < fl->Size; i++)
 			{
@@ -73,38 +74,53 @@ class NewGameMenu:public Menu
 				
 				string text = "\nMusi zaczynaæ siê od Wielkiej litery (bez polskich znaków) ";
 				text.append("i mieæ co najmniej trzy ma³e (polskie znaki dozwolone).\n");
+				text.append("Jeœli chcesz wróciæ do menu g³ównego, wpisz 'menu'. Jeœli chcesz zacz¹æ od pocz¹tku, napisz 'popraw'.\n");
 				text.append("WprowadŸ: ");
 				
-				string ms = "([A-Z][a-z¹æêñ³ó¿Ÿ]{3,}|wyjdŸ|popraw)";
+				string ms = "([A-Z][a-z¹æêñ³ó¿Ÿ]{3,}|menu|popraw)";
 				
 				sbuff = menuText;
 				sbuff.append("Mianownik (Kto? Co?):");
 				refreshConsole(sbuff);
 				cases[0] = dm->matchedString(ms,text);
+				if(cases[0] == "menu") break;
+				else if(cases[0] == "popraw") continue;
 				sbuff = menuText;
 				sbuff.append("Dope³niacz (Kogo? Czego?):");
 				refreshConsole(sbuff);
 				cases[1] = dm->matchedString(ms,text);
+				if(cases[1] == "menu") break;
+				else if(cases[1] == "popraw") continue;
 				sbuff = menuText;
 				sbuff.append("Celownik (Komu? Czemu?):");
 				refreshConsole(sbuff);
 				cases[2] = dm->matchedString(ms,text);
+				if(cases[2] == "menu") break;
+				else if(cases[2] == "popraw") continue;
 				sbuff = menuText;
 				sbuff.append("Biernik (Kogo? Co?):");
 				refreshConsole(sbuff);
 				cases[3] = dm->matchedString(ms,text);
+				if(cases[3] == "menu") break;
+				else if(cases[3] == "popraw") continue;
 				sbuff = menuText;
 				sbuff.append("Narzêdnik (Z kim? Z czym?):");
 				refreshConsole(sbuff);
 				cases[4] = dm->matchedString(ms,text);
+				if(cases[4] == "menu") break;
+				else if(cases[4] == "popraw") continue;
 				sbuff = menuText;
 				sbuff.append("Miejscownik (O kim? O czym?):");
 				refreshConsole(sbuff);
 				cases[5] = dm->matchedString(ms,text);
+				if(cases[5] == "menu") break;
+				else if(cases[6] == "popraw") continue;
 				sbuff = menuText;
 				sbuff.append("Wo³acz (O mój! O moja!):");
 				refreshConsole(sbuff);
 				cases[6] = dm->matchedString(ms,text);
+				if(cases[6] == "menu") break;
+				else if(cases[6] == "popraw") continue;
 				
 				string buff1 = "";
 				string buff2 = "";

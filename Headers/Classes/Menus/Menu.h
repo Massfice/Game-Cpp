@@ -10,6 +10,7 @@ class Menu
 	string wrongOption;
 	bool isActive;
 	bool cbool;
+	bool noAtFirst;
 	
 	virtual void executeOption() = 0;
 	
@@ -59,6 +60,29 @@ class Menu
 		wrongOption = "\nOpcja nie zosta³a zaprogramowana.";
 		isActive = true;
 		cbool = true;
+		setArrayOption(str);
+	}
+	
+	Menu(string text, bool noAtFirst)
+	{
+		i = 0;
+		string* str = new string[2];
+		if(noAtFirst)
+		{
+			str[0] = "Nie";
+			str[1] = "Tak";
+		}
+		else
+		{
+			str[0] = "Tak";
+			str[1] = "Nie";
+		}
+		size = 2;
+		options = new string[size];
+		wrongOption = "\nOpcja nie zosta³a zaprogramowana.";
+		isActive = true;
+		cbool = true;
+		this->noAtFirst = noAtFirst;
 		setArrayOption(str);
 	}
 	
