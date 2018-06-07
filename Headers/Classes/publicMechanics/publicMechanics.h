@@ -87,6 +87,36 @@ class publicMechanics
 		return sbuff;
 	}
 
+	string matchedString(string regS, string text)
+	{
+		
+		string r;
+		regex reg(regS.c_str(), regex_constants::ECMAScript);
+		
+		cout << text; 
+		
+		do
+		{
+			cin >> r;
+			r = plString(r);
+			if(!regex_match(r,reg)) cout << "Nie pasuje! WprowadŸ ponownie: ";
+		} while(!regex_match(r,reg));
+		
+		system("cls");
+		
+		return r;
+	}
+	
+	bool validGameString(string gameString)
+	{
+		
+		string buff = "^[KM]\\|([A-Z][a-z¹æêñ³ó¿Ÿ]{3,}\\|){7}([1-9][0-9]*\\|){7}(([a-z]+";
+		buff.append("(\\.[1-9]+)+(\\+[a-z]+(\\.[1-9]+)+)*)?\\|){3}(((0|-?([1-9]|[1-9][0-9]|100))\\|)*(0|-?([1-9]|[1-9][0-9]|100)){1})?$");
+		regex reg(buff.c_str(),regex_constants::ECMAScript);
+		
+		return regex_match(gameString.c_str(),reg);
+	}
+	
 	splitedString* splitString(string str, char c)
 	{
 		string* r;
@@ -318,9 +348,9 @@ class publicMechanics
 	int sizeOfArray(string name)
 	{
 		int i;
-		for(i = 0; i <= l; i++)
+		for(i = 0; i < l; i++)
 		{
-			if(tabs[i]->name==name) return tabs[i]->size;
+			if(tabs[l - i - 1]->name==name) return tabs[l - i - 1]->size;
 		}
 		return -1;
 	}

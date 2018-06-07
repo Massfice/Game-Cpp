@@ -67,23 +67,44 @@ class NewGameMenu:public Menu
 				ssmenu->setOption();
 				if(ssmenu->getCBool()) break;
 				menuText = "Odmieñ swoje imiê przez przypadki:\n";
-				refreshConsole(menuText);
+				string sbuff;
+				
    				string* cases = new string[7];
 				
-				cout << "Mianownik (Kto? Co?): ";
-				cinp(cases[0]);
-				cout <<"Dope³niacz (Kogo? Czego?): ";
-				cinp(cases[1]);
-				cout << "Celownik (Komu? Czemu?): ";
-				cinp(cases[2]);
-				cout << "Biernik (Kogo? Co?): ";
-				cinp(cases[3]);
-				cout << "Narzêdnik (Z kim? Z czym?): ";
-				cinp(cases[4]);
-				cout << "Miejscownik (O kim? O czym?): ";
-				cinp(cases[5]);
-				cout << "Wo³acz (O mój! O moja!): ";
-				cinp(cases[6]);
+				string text = "\nMusi zaczynaæ siê od Wielkiej litery (bez polskich znaków) ";
+				text.append("i mieæ co najmniej trzy ma³e (polskie znaki dozwolone).\n");
+				text.append("WprowadŸ: ");
+				
+				string ms = "([A-Z][a-z¹æêñ³ó¿Ÿ]{3,}|wyjdŸ|popraw)";
+				
+				sbuff = menuText;
+				sbuff.append("Mianownik (Kto? Co?):");
+				refreshConsole(sbuff);
+				cases[0] = dm->matchedString(ms,text);
+				sbuff = menuText;
+				sbuff.append("Dope³niacz (Kogo? Czego?):");
+				refreshConsole(sbuff);
+				cases[1] = dm->matchedString(ms,text);
+				sbuff = menuText;
+				sbuff.append("Celownik (Komu? Czemu?):");
+				refreshConsole(sbuff);
+				cases[2] = dm->matchedString(ms,text);
+				sbuff = menuText;
+				sbuff.append("Biernik (Kogo? Co?):");
+				refreshConsole(sbuff);
+				cases[3] = dm->matchedString(ms,text);
+				sbuff = menuText;
+				sbuff.append("Narzêdnik (Z kim? Z czym?):");
+				refreshConsole(sbuff);
+				cases[4] = dm->matchedString(ms,text);
+				sbuff = menuText;
+				sbuff.append("Miejscownik (O kim? O czym?):");
+				refreshConsole(sbuff);
+				cases[5] = dm->matchedString(ms,text);
+				sbuff = menuText;
+				sbuff.append("Wo³acz (O mój! O moja!):");
+				refreshConsole(sbuff);
+				cases[6] = dm->matchedString(ms,text);
 				
 				string buff1 = "";
 				string buff2 = "";
@@ -124,6 +145,7 @@ class NewGameMenu:public Menu
 				buff1.append(""); //Przedmioty w sakiewce, oddzielane za pomoc¹ plusa ("+") - split[16]
 				buff1.append("|");
 				buff1.append(""); //Przedmioty w domu/skarbcu, oddzielane za pomoc¹ plusa ("+") - split[17]
+				buff1.append("|");
 				
 				sysTIME = new SYSTEMTIME;
 				GetSystemTime(sysTIME);

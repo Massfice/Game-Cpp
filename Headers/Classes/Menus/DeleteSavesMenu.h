@@ -29,10 +29,9 @@ class DeleteSavesMenu:public Menu
 			if(remove(buff.c_str()) != 0) perror("Deleting Error: ");
 			else
 			{
-				cout << endl << "Zapis usuniêty. Usuniêcie zapisu wymaga ponownego uruchomienia gry. Nast¹pi wyjœcie z programu..." << endl;	
+				cout << endl << "Zapis usuniêty." << endl;	
 			}
 			system("pause");
-			exit(0);
 		}
 		
 	}
