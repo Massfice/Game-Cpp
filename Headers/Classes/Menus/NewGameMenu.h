@@ -77,7 +77,7 @@ class NewGameMenu:public Menu
 				text.append("Jeœli chcesz wróciæ do menu g³ównego, wpisz 'menu'. Jeœli chcesz zacz¹æ od pocz¹tku, napisz 'popraw'.\n");
 				text.append("WprowadŸ: ");
 				
-				string ms = "([A-Z][a-z¹æêñ³ó¿Ÿ]{3,}|menu|popraw)";
+				string ms = "([A-Z][a-z¹æêñ³ó¿Ÿ]{2,}|menu|popraw)";
 				
 				sbuff = menuText;
 				sbuff.append("Mianownik (Kto? Co?):");

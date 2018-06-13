@@ -3,6 +3,7 @@
 #include "Headers/Classes/Menus/Menu.h"
 #include "Headers/Classes/Menus/ConfirmMenu.h"
 #include "Headers/Classes/Menus/DeleteSavesMenu.h"
+#include "Headers/Classes/Menus/LoadGameMenu.h"
 #include "Headers/Classes/Menus/SetSexMenu.h"
 #include "Headers/Classes/Menus/ReplaceSaveMenu.h"
 #include "Headers/Classes/Menus/NewGameMenu.h"

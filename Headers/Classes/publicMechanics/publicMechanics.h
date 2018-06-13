@@ -110,7 +110,7 @@ class publicMechanics
 	bool validGameString(string gameString)
 	{
 		
-		string buff = "^[KM]\\|([A-Z][a-z¹æêñ³ó¿Ÿ]{3,}\\|){7}([1-9][0-9]*\\|){7}(([a-z]+";
+		string buff = "^[KM]\\|([A-Z][a-z¹æêñ³ó¿Ÿ]{2,}\\|){7}([1-9][0-9]*\\|){7}(([a-z]+";
 		buff.append("(\\.[1-9]+)+(\\+[a-z]+(\\.[1-9]+)+)*)?\\|){3}(((0|-?([1-9]|[1-9][0-9]|100))\\|)*(0|-?([1-9]|[1-9][0-9]|100)){1})?$");
 		regex reg(buff.c_str(),regex_constants::ECMAScript);
 		
